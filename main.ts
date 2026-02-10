@@ -1,5 +1,6 @@
 input.onButtonPressed(Button.A, function () {
     mottatt = "Annet"
+    drive(mottatt)
 })
 function drive (mottatt: string) {
     if (mottatt == "Pil V") {
