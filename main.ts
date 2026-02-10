@@ -50,17 +50,16 @@ function drive (mottatt: string) {
     mottatt = "Stopp"
 }
 radio.onReceivedString(function (receivedString) {
-    mottatt2 = receivedString
+    mottatt = receivedString
     basic.showIcon(IconNames.Heart)
     drive(mottatt)
 })
 let mottatt = ""
 let max_fart = 0
-let mottatt2 = ""
 let svingetid = 0
 radio.setGroup(69)
 radio.setTransmitPower(7)
 svingetid = 2000
-mottatt2 = ""
+let mottatt2 = ""
 max_fart = 20
 basic.showIcon(IconNames.Heart)
