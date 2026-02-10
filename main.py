@@ -1,66 +1,68 @@
-input.onButtonPressed(Button.A, function () {
-    mottatt = "Annet"
-})
-function drive (mottatt: string) {
-    if (mottatt == "Pil V") {
+def on_button_pressed_a():
+    global mottatt2
+    mottatt2 = "Annet"
+input.on_button_pressed(Button.A, on_button_pressed_a)
+
+def drive(mottatt: str):
+    if mottatt == "Pil V":
         servos.P2.run(-1 * max_fart)
         servos.P0.run(0)
         basic.pause(svingetid)
-        basic.showLeds(`
+        basic.show_leds("""
             . . # . .
             . # . . .
             # # # # #
             . # . . .
             . . # . .
-            `)
+            """)
         servos.P0.stop()
         servos.P2.stop()
-    } else if (mottatt == "Pil H") {
+    elif mottatt == "Pil H":
         servos.P2.run(0)
         servos.P0.run(max_fart)
         basic.pause(svingetid)
-        basic.showLeds(`
+        basic.show_leds("""
             . . # . .
             . . . # .
             # # # # #
             . . . # .
             . . # . .
-            `)
+            """)
         servos.P0.stop()
         servos.P2.stop()
-    } else if (mottatt == "Annet") {
+    elif mottatt == "Annet":
         servos.P2.run(-1 * max_fart)
         servos.P0.run(max_fart)
-        basic.showLeds(`
+        basic.show_leds("""
             . . # . .
             . # # # .
             # . # . #
             . . # . .
             . . # . .
-            `)
+            """)
         basic.pause(2000)
         servos.P2.stop()
         servos.P0.stop()
-    } else if (mottatt == "stopp") {
+    elif mottatt == "stopp":
         servos.P2.stop()
         servos.P0.stop()
-        basic.showIcon(IconNames.Heart)
-        basic.showString("S")
-    }
+        basic.show_icon(IconNames.HEART)
+        basic.show_string("S")
     mottatt = "Stopp"
-}
-radio.onReceivedString(function (receivedString) {
+
+def on_received_string(receivedString):
+    global mottatt2
     mottatt2 = receivedString
-    basic.showIcon(IconNames.Heart)
-    drive(mottatt)
-})
-let mottatt = ""
-let max_fart = 0
-let mottatt2 = ""
-let svingetid = 0
-radio.setGroup(69)
-radio.setTransmitPower(7)
+    basic.show_icon(IconNames.HEART)
+    drive(mottatt2)
+radio.on_received_string(on_received_string)
+
+max_fart = 0
+mottatt2 = ""
+svingetid = 0
+radio.set_group(1)
+radio.set_transmit_power(7)
 svingetid = 2000
 mottatt2 = ""
 max_fart = 20
-basic.showIcon(IconNames.Heart)
+basic.show_icon(IconNames.HAPPY)
